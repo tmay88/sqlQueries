@@ -1,0 +1,34 @@
+select code, count (code) from giseditor_current.servicearea where code in ()
+group by code;
+
+
+delete from giseditor_current.servicearea where code in ();
+
+  
+insert into giseditor_current.servicearea (code, geom)
+select code, geom from gisload.xxx --name of final file
+
+--Check for Self Intersections
+
+select id, code, st_isvalidreason(geom) from giseditor_current.servicearea
+where code in ()
+and not st_isvalid(geom)
+order by st_isvalidreason(geom);
+
+update giseditor_current.servicearea
+set geom = st_makevalid(geom)
+where code = '' 
+and not st_isvalid(geom);
+
+or
+
+update giseditor_current.servicearea
+set geom = st_makevalid(geom)
+where id in (
+
+)
+and not st_isvalid(geom);
+
+
+Check codes in SAE to confirm they uploaded correctly
+_Drop the tables from gisload

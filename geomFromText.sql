@@ -1,0 +1,1 @@
+select st_geomfromtext('', 4326)

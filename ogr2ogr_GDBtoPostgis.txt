@@ -1,0 +1,1 @@
+ogr2ogr -f "PostgreSQL" PG:"host=localhost user='postgres' dbname='postgres' password=''" -nlt PROMOTE_TO_MULTI -nln x.ar2 oncor_080423.gdb ar2 -lco GEOMETRY_NAME=geom
