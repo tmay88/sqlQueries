@@ -35,10 +35,19 @@ WHERE p.placename = 'HOUSTON'
 AND ref_poly.objectid = '8868599'
 AND ST_DWithin(p.shape::geography, ref_poly.shape::geography, 10)
 LIMIT 10;
-
+-----------------------------------------------------------------
 SELECT target_parcel.objectid, target_parcel.fulladdress, target_parcel.shape
 FROM gcverbase00021.parcels AS target_parcel, gcverbase00021.parcels AS ref_parcel
 WHERE ref_parcel.objectid = '5464231'
 AND ST_DWithin(ST_CollectionExtract(ref_parcel.shape::geometry, 3)::geography, 
                ST_CollectionExtract(target_parcel.shape::geometry, 3)::geography, 10);
+-----------------------------------------------------------------
+SELECT p.objectid, p.fulladdress, p.shape
+FROM gis_staging.parcels AS p, gis_staging.parcels AS ref_poly
+WHERE p.placename = 'SAN ANTONIO'
+AND ref_poly.objectid = '12482289'
+AND ST_DWithin(
+    ST_CollectionExtract(p.shape, 3)::geography,
+    ST_CollectionExtract(ref_poly.shape, 3)::geography,
+    200);
 
